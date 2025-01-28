@@ -1,0 +1,194 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #2c3e50; /* Dark background color */
+  min-height: 100vh; /* Ensure the body takes the full height of the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Title Styling */
+h1 {
+  color: #ecf0f1; /* Light text color */
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+/* Board Styling */
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(80px, 120px)); /* Responsive cell size */
+  grid-template-rows: repeat(3, minmax(80px, 120px));
+  gap: 10px;
+  background-color: #34495e; /* Darker background for the board */
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Cell Styling */
+.cell {
+  width: 100%;
+  height: 100%;
+  background-color: #ecf0f1; /* Light background for cells */
+  border: 2px solid #2c3e50; /* Dark border */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  border-radius: 10px;
+}
+
+.cell:hover:not(.disabled) {
+  background-color: #bdc3c7; /* Light gray on hover */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.cell.disabled {
+  cursor: not-allowed;
+  /* opacity: 0.7; */
+}
+
+.cell.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Colors for X and O */
+.cell[data-value="X"] {
+  color: #e74c3c; /* Red for X */
+}
+
+.cell[data-value="O"] {
+  color: #2ecc71; /* Green for O */
+}
+
+/* Reset Button Styling */
+#reset {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #3498db; /* Blue button */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#reset:hover {
+  background-color: #2980b9; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+/* Status Text Styling */
+#status {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #ecf0f1; /* Light text color */
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#status.show {
+  opacity: 1;
+}
+
+/* Confetti Styling */
+.confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff0;
+  opacity: 0;
+  animation: confetti 2s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.celebrate {
+  animation: celebrate 0.5s ease-in-out;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  h1 {
+      font-size: 2rem; /* Smaller title on small devices */
+  }
+
+  #board {
+      grid-template-columns: repeat(3, minmax(60px, 100px)); /* Smaller cells on small devices */
+      grid-template-rows: repeat(3, minmax(60px, 100px));
+      gap: 5px;
+      padding: 10px;
+  }
+
+  .cell {
+      font-size: 1.5rem; /* Smaller font size on small devices */
+  }
+
+  #reset {
+      font-size: 0.9rem; /* Smaller button text on small devices */
+      padding: 8px 16px;
+  }
+
+  #status {
+      font-size: 1rem; /* Smaller status text on small devices */
+  }
+}
